@@ -20,6 +20,9 @@ RUN npm install --frozen-lockfile || yarn install --frozen-lockfile
 # Copy source code
 COPY . .
 
+# Generate Prisma Client *before* building
+RUN npx prisma generate
+
 # Build Next.js
 RUN npm run build || yarn build
 
@@ -46,4 +49,3 @@ COPY --from=builder /app/next.config.ts ./next.config.ts
 
 EXPOSE 3000
 CMD ["npm", "start"]
-
