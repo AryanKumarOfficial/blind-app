@@ -47,5 +47,8 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/next.config.ts ./next.config.ts
 
+# Copy the custom-generated Prisma Client
+COPY --from=builder /app/src/generated/prisma ./src/generated/prisma
+
 EXPOSE 3000
 CMD ["npm", "start"]
