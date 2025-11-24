@@ -11,7 +11,9 @@ import { PrismaClient } from "@/generated/prisma";
  * Stores the Prisma instance in the global scope to persist across hot reloads.
  * @type {Object}
  */
-const globalForPrisma = global as unknown as { prisma: PrismaClient };
+const globalForPrisma = global as unknown as {
+  prisma: PrismaClient | undefined;
+};
 
 /**
  * Singleton Prisma Client instance.
@@ -31,6 +33,6 @@ const globalForPrisma = global as unknown as { prisma: PrismaClient };
  *
  * @see {@link https://www.prisma.io/docs/guides/other/troubleshooting-orm/help-articles/nextjs-prisma-client-dev-practices}
  */
-export const prisma = globalForPrisma.prisma || new PrismaClient();
+export const prisma = globalForPrisma.prisma ?? new PrismaClient();
 
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
