@@ -1,10 +1,10 @@
+import type { PrismaClient } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 import { analyzeToxicity } from "@/helpers/contentModeration";
 import { prisma } from "@/lib/prisma";
-import type { PrismaClient } from "@prisma/client";
 
 // Use a default during build/dev to avoid throwing at module evaluation.
 // In production, ensure JWT_SECRET is set in the environment.

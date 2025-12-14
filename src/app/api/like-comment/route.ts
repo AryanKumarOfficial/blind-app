@@ -1,7 +1,7 @@
+import type { PrismaClient } from "@prisma/client";
 import { type NextRequest, NextResponse } from "next/server";
 import { getAuthenticatedUserId } from "@/helpers/auth/user";
 import { prisma } from "@/lib/prisma";
-import type { PrismaClient } from "@prisma/client";
 
 // Constants
 const ENGAGEMENT_SCORES = {

@@ -1,11 +1,11 @@
 export const dynamic = "force-dynamic";
 
+import type { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import type { PrismaClient } from "@prisma/client";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
