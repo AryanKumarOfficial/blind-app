@@ -1,7 +1,7 @@
+import type { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { type NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import type { PrismaClient } from "@prisma/client";
 
 const EMAIL_REGEX = /^\w+@oriental\.ac\.in$/i;
 const PASSWORD_MIN_LENGTH = 8;

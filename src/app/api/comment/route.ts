@@ -1,7 +1,7 @@
+import type { PrismaClient } from "@prisma/client";
 import { type NextRequest, NextResponse } from "next/server";
 import { analyzeToxicity } from "@/helpers/contentModeration";
 import { prisma } from "@/lib/prisma";
-import type { PrismaClient } from "@prisma/client";
 
 /**
  * Create a new comment for a post.
