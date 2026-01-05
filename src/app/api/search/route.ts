@@ -5,7 +5,7 @@ No other identifiers (email, real name, etc.) are searchable.
 */
 
 import { type NextRequest, NextResponse } from "next/server";
-import type { Prisma } from "@/generated/prisma";
+import type { Prisma } from "@/../generated/prisma/client";
 import { getAuthenticatedUserId } from "@/helpers/auth/user";
 import { prisma } from "@/lib/prisma";
 

@@ -6,7 +6,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import type { Comment } from "@/generated/prisma";
+import type { Comment } from "@/../generated/prisma/client";
 import type {
   CommentWithReplies,
   InfinitePostsData,
