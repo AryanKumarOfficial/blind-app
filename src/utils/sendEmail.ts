@@ -1,17 +1,14 @@
 import sgMail from "@sendgrid/mail";
-import {Resend} from "resend"
 import {transporter} from "@/lib/mail/setup";
 
 const sendgridApiKey = process.env.SENDGRID_API_KEY;
-const resnedApiKey = process.env.RESEND_API_KEY;
 const fromEmail = process.env.EMAIL_FROM || "noreply@blindapp.local";
 
-if (!sendgridApiKey || !resnedApiKey) {
-    throw new Error("API_KEY is not set in environment variables");
+if (!sendgridApiKey) {
+    throw new Error("API_KEY is not set in environment variables for emails");
 }
 sgMail.setApiKey(sendgridApiKey);
 
-const resend = new Resend(resnedApiKey);
 
 /**
  * Sends an email using the configured SendGrid client.
