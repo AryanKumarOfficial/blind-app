@@ -1,6 +1,6 @@
+import type { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { type NextRequest, NextResponse } from "next/server";
-import { Prisma } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";
 
 const EMAIL_REGEX = /^\w+@oriental\.ac\.in$/i;
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
     // 3. Generate OTP for email verification
 
     // 4. Create user with transaction
-    const user = await prisma.$transaction(async (tx) => {
+    const user = await prisma.$transaction(async (tx: PrismaClient) => {
       // Hash password
       const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -132,17 +132,6 @@ export async function POST(req: NextRequest) {
     );
   } catch (error) {
     console.error("Registration error:", error);
-
-    // Handle Prisma-specific errors
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === "P2002") {
-        // Unique constraint violation (shouldn't happen due to pre-check, but just in case)
-        return NextResponse.json(
-          { error: "User already exists" },
-          { status: 409 },
-        );
-      }
-    }
 
     return NextResponse.json(
       { error: "Internal Server Error" },

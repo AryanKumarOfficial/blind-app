@@ -4,14 +4,24 @@
  * to prevent connection pool exhaustion in development.
  * @module lib/prisma
  */
-import { PrismaClient } from "@/generated/prisma";
 
+import {PrismaClient} from "../../generated/prisma/client";
+import {PrismaPg} from "@prisma/adapter-pg"
+import {Pool} from "pg"
 /**
  * Global object augmentation for Prisma Client.
  * Stores the Prisma instance in the global scope to persist across hot reloads.
  * @type {Object}
  */
-const globalForPrisma = global as unknown as { prisma: PrismaClient };
+const globalForPrisma = global as unknown as {
+    prisma: PrismaClient | undefined;
+};
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+})
+
+const adapter = new PrismaPg(pool)
 
 /**
  * Singleton Prisma Client instance.
@@ -31,6 +41,6 @@ const globalForPrisma = global as unknown as { prisma: PrismaClient };
  *
  * @see {@link https://www.prisma.io/docs/guides/other/troubleshooting-orm/help-articles/nextjs-prisma-client-dev-practices}
  */
-export const prisma = globalForPrisma.prisma || new PrismaClient();
+export const prisma = globalForPrisma.prisma ?? new PrismaClient({adapter});
 
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;

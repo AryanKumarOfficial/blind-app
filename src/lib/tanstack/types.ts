@@ -4,7 +4,7 @@ import type {
   LoginLog,
   Notification,
   Post,
-} from "@/generated/prisma";
+} from "@/../generated/prisma/client";
 
 // Type for the author's anonymous details
 export type AuthorDetails = {

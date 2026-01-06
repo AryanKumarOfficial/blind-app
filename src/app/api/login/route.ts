@@ -1,10 +1,10 @@
 export const dynamic = "force-dynamic";
 
+import type { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
-import { Prisma } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -91,7 +91,9 @@ export async function POST(req: NextRequest) {
             category: "AUTH",
           },
         })
-        .catch((err) => console.error("Failed to log login attempt:", err));
+        .catch((err: Error | unknown) =>
+          console.error("Failed to log login attempt:", err),
+        );
 
       return NextResponse.json(
         { error: "Invalid credentials" },
@@ -113,7 +115,9 @@ export async function POST(req: NextRequest) {
             status: "LOCKED",
           },
         })
-        .catch((err) => console.error("Failed to log locked attempt:", err));
+        .catch((err: Error | unknown) =>
+          console.error("Failed to log locked attempt:", err),
+        );
 
       return NextResponse.json(
         {
@@ -146,7 +150,7 @@ export async function POST(req: NextRequest) {
             status: "UNVERIFIED",
           },
         })
-        .catch((err) =>
+        .catch((err: unknown) =>
           console.error("Failed to log unverified attempt:", err),
         );
 
@@ -179,7 +183,7 @@ export async function POST(req: NextRequest) {
     });
 
     // 10. Update user login tracking and logs
-    await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx: PrismaClient) => {
       await tx.user.update({
         where: { id: user.id },
         data: {
@@ -228,9 +232,6 @@ export async function POST(req: NextRequest) {
     );
   } catch (error) {
     console.error("Login error:", error);
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      console.error("Prisma error code:", error.code);
-    }
 
     return NextResponse.json({ error: "Login failed" }, { status: 500 });
   }

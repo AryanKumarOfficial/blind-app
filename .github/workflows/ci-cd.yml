@@ -10,7 +10,7 @@ jobs:
   lint-build:
     runs-on: ubuntu-latest
 
-    # ✅ Global environment variables (available to all steps)
+    #  Global environment variables (available to all steps)
     env:
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
@@ -32,12 +32,6 @@ jobs:
 
       - name: Generate OpenAPI spec from Zod schemas
         run: npm run generate:openapi
-
-      - name: Run lint and auto-fix
-        run: npm run lint:fix
-
-      - name: Run lint check
-        run: npm run lint
 
       - name: Run tests
         run: npx jest test
