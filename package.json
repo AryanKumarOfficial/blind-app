@@ -12,7 +12,8 @@
     "lint:fix": "biome check --write",
     "db:seed": "tsx prisma/seed.ts",
     "email": "email dev --port 8080",
-    "generate:openapi": "tsx scripts/generate-openapi.ts"
+    "generate:openapi": "tsx scripts/generate-openapi.ts",
+    "postinstall": "npx prisma generate"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
