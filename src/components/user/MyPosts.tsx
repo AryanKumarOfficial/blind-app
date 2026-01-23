@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import type React from "react";
-import type { Post } from "@/generated/prisma";
+import type { Post } from "@/../generated/prisma/client";
 import PostCard from "./PostCard";
 
 interface UserMetaData {

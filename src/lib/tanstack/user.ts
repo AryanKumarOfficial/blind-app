@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import type { Post } from "@/generated/prisma";
+import type { Post } from "@/../generated/prisma/client";
 import { POSTS_QUERY_KEY } from "@/lib/tanstack/posts";
 import type { NewPostPayload, UserProfile } from "@/lib/tanstack/types";
 

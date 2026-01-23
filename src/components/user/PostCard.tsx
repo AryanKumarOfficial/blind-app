@@ -1,9 +1,9 @@
 import { formatDistanceToNow } from "date-fns";
 import { enIN } from "date-fns/locale";
 import { motion } from "framer-motion";
-import { Flag } from "lucide-react"; // Icon for flagged posts
+import { Flag } from "lucide-react";
 import type React from "react";
-import type { Post } from "@/generated/prisma";
+import type { Post } from "@/../generated/prisma/client";
 
 interface PostCardProps {
   post: Post;
